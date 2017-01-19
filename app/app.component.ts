@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { OnInit } from '@angular/core';
+
 import { Idol } from './idol';
+import { IdolService } from './idol.service';
 
 @Component({
   selector: 'my-app',
@@ -61,28 +64,24 @@ import { Idol } from './idol';
       margin-right: .8em;
       border-radius: 4px 0 0 4px;
     }
-  `]
+  `],
+  providers: [IdolService]
 })
 
-export class AppComponent  {
+export class AppComponent implements OnInit {
+  constructor(private idolService: IdolService) {}
+
+  ngOnInit(): void {
+    this.getIdols();
+  }
+
   title = 'School idol project';
   selectedIdol: Idol;
-  idols = IDOLS;
+  idols: Idol[];
+  getIdols(): void {
+    this.idolService.getIdols().then(idols => this.idols = idols);
+  }
   onSelect(idol: Idol): void {
     this.selectedIdol = idol;
   }
 }
-
-const IDOLS: Idol[] = [
-  { id: 11, name: 'honoka' },
-  { id: 12, name: 'umi'},
-  { id: 13, name: 'kotori'},
-  { id: 14, name: 'maki'},
-  { id: 15, name: 'rin'},
-  { id: 16, name: 'hanayo'},
-  { id: 17, name: 'nico'},
-  { id: 18, name: 'eli'},
-  { id: 19, name: 'nozomi'}
-];
-
-
