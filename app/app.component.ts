@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Idol } from './idol';
 
 @Component({
   selector: 'my-app',
@@ -10,14 +11,7 @@ import { Component } from '@angular/core';
         <span class="badge">{{idol.id}}</span> {{idol.name}}
       </li>
     </ul>
-    <div *ngIf="selectedIdol">
-      <h2>{{ selectedIdol.name }} details!</h2>
-      <div><label>id: </label>{{ selectedIdol.id }}</div>
-      <div>
-        <label>name: </label>
-        <input [(ngModel)]="selectedIdol.name" placeholder="name">
-      </div>
-    </div>
+    <my-idol-detail [idol]="selectedIdol"></my-idol-detail>
   `,
   styles: [`
     .selected {
@@ -77,11 +71,6 @@ export class AppComponent  {
   onSelect(idol: Idol): void {
     this.selectedIdol = idol;
   }
-}
-
-export class Idol {
-  id: number;
-  name: string;
 }
 
 const IDOLS: Idol[] = [
