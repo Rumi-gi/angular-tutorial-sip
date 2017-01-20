@@ -8,4 +8,8 @@ export class IdolService {
     getIdols(): Promise<Idol[]> {
         return Promise.resolve(IDOLS);
     }
+
+    getIdol(id: number): Promise<Idol> {
+        return this.getIdols().then(idols => idols.find(idol => idol.id === id));
+    }
 }

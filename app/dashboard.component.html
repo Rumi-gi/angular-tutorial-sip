@@ -1,0 +1,8 @@
+<h3>Top Idols</h3>
+<div class="grid grid-pad">
+    <a *ngFor="let idol of idols" [routerLink]="['/detail', idol.id]" class="col-1-4">
+        <div class="module idol">
+            <h4>{{idol.name}}</h4>
+        </div>
+    </a>
+</div>
