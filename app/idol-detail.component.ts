@@ -31,4 +31,8 @@ export class IdolDetailComponent implements OnInit {
   goBack(): void {
     this.location.back();
   }
+
+  save(): void {
+    this.idolService.update(this.idol).then(() => this.goBack());
+  }
 }

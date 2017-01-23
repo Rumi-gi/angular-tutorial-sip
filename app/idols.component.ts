@@ -36,4 +36,22 @@ export class IdolsComponent implements OnInit {
   gotoDetail(): void {
     this.router.navigate(['/detail', this.selectedIdol.id]);
   }
+
+  add(name: string): void {
+    name = name.trim();
+    if (!name) return;
+    this.idolService.create(name)
+      .then(idol => {
+        this.idols.push(idol);
+        this.selectedIdol = null;
+      });
+  }
+
+  delete(idol: Idol): void {
+    this.idolService.delete(idol.id)
+      .then(() => {
+        this.idols = this.idols.filter(i => i !== idol);
+        if (this.selectedIdol === idol) this.selectedIdol = null;
+      });
+  }
 }

@@ -1,7 +1,12 @@
 <h2>My Idols</h2>
+<div>
+  <label>Idol name:</label><input #idolName />
+  <button (click)="add(idolName.value); idolName.value=''">Add</button>
+</div>
 <ul class="idols">
   <li *ngFor="let idol of idols" (click)="onSelect(idol)" [class.selected]="idol === selectedIdol">
-    <span class="badge">{{idol.id}}</span> {{idol.name}}
+    <span class="badge">{{idol.id}}</span><span>{{idol.name}}</span>
+    <button class="delete" (click)="delete(idol); $event.stopPropagation()">x</button>
   </li>
 </ul>
 <div *ngIf="selectedIdol">
